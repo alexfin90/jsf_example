@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>JSF tutorial</title>
+</h:head>
+<h:body>
+	<h2>Ajax Example</h2>
+	 
+	<h:form>
+		<p:inputText id="inputName" value="#{userBean.name}">
+		</p:inputText>
+		<p:commandButton value="Show Message">
+			<f:ajax execute="inputName" render="outputName"></f:ajax>
+		</p:commandButton>
+		<p:outputLabel id="outputName"
+			value="#{userBean.welcomeMessage != null ? userBean.welcomeMessage : ''}">
+		</p:outputLabel>
+		<p:panelGrid columns="3" layout="grid">
+			<p:selectOneMenu value="#{userBean.selectedCountry}"
+			onchange="submit()"
+			valueChangeListener="#{userBean.onchangeCountries}"> 
+			<f:selectItems value="#{userBean.countryMap}"> </f:selectItems>
+			</p:selectOneMenu>
+			<p:outputLabel value="New Value:#{userBean.selectedCountry}"></p:outputLabel>
+			<p:outputLabel value="Old Value:#{userBean.oldselectCountry}"></p:outputLabel>
+		</p:panelGrid>
+		
+		<p:commandButton value="Next" action="#{userBean.goPageNext}" actionListener="#{userBean.updateData}"> </p:commandButton>
+	</h:form>
+</h:body>
+</html>
